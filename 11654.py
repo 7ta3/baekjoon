@@ -1,9 +1,7 @@
-x = input()
-lst = []
-for i in 'abcdefghijklmnopqrstuvwxyz' :
-    for j in range(len(x)) :
-        if x[j] == i :
-            lst.append(f'{j}')
-        else :
-            lst.append('-1')
-print(' '.join(lst))
+import sys
+N = int(input())
+s = input()
+sum = 0
+for i in range(N) :
+    sum += int(s[i])
+print(sum)

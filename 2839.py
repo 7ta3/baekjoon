@@ -1,4 +1,3 @@
-import math
 N = int(input())
 max_5 = N // 5
 reminder = N % 5

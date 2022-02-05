@@ -6,7 +6,6 @@ while X > 0 :
     line += 1
     X -= line
 X += line
-print(X, line)
 
 if line % 2 :
     print(f'{line-X+1}/{X}')

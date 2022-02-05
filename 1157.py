@@ -1,6 +1,3 @@
-from re import L
-
-
 x = input().upper()
 alpha_list = []
 cnt_list = []
