@@ -19,3 +19,5 @@ for _ in range(T):
         print(0)
     elif distance < r_max + r_min :
         print(2)
+
+# 아 ㅋㅋ 이거 이렇게 하는거 아닌데 엌ㅋㅋ
