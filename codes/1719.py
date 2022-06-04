@@ -1,6 +1,8 @@
 from collections import defaultdict
 from heapq import *
 import sys
+
+sys.stdin = open("input.txt", 'r')
 input = sys.stdin.readline
 INF = sys.maxsize
 
@@ -26,12 +28,21 @@ def dijk():
                     heappush(ST, (D[i][n2], n2, next))
 
     for i in ans:
-        print(*i)
+        temp = [str(j) for j in i]
+        L.append(' '.join(temp))
 
-n, m = map(int, input().split())
-G = defaultdict(list)
-for _ in range(m):
-    n1, n2, t = map(int, input().split())
-    G[n1].append((t, n2))
-    G[n2].append((t, n1))
-dijk()
+L = []
+for T in range(50):
+    n, m = map(int, input().split())
+    print(T)
+    print(n, m)
+    G = defaultdict(list)
+    for _ in range(m):
+        n1, n2, t = map(int, input().split())
+        G[n1].append((t, n2))
+        G[n2].append((t, n1))
+    dijk()
+
+with open('output.txt','w',encoding='UTF-8') as f:
+    for name in L:
+        f.write(name+'\n')
