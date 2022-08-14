@@ -1,40 +1,62 @@
-from itertools import permutations
-import sys
+import sys, math
 input = sys.stdin.readline
 
 N = int(input())
 A = list(map(int, input().split()))
 
-def func(arr, n, sum_val, num):
-    print(n, sum_val, num, arr)
-    if n < 1 or N < sum_val or N < num:
-        return
+def func1(arr, sum_val, prev_num, n):
+    temp = math.factorial(n)
+    temp += sum_val
 
-    temp = 1
-    for i in range(1, n+1):
-        temp *= i
-    print(temp)
+    if num <= temp:
+        V[prev_num] = True
+        arr.append(prev_num)
 
-    if N < temp:
-        arr.append(num)
-        func(arr, n-1, sum_val, 1)
+        if len(arr) == N:
+            global ans
+            ans = arr
+            return
+
+        for i in range(1, N+1):
+            if not V[i]:
+                func1(arr, sum_val, i, n-1)
+                break
 
     else:
-        sum_val += temp
+        for i in range(prev_num + 1, N+1):
+            if not V[i]:
+                func1(arr, temp, i, n)
+                break
 
-        if sum_val == N:
-            global ans
-            arr.append(num)
-            ans = arr
-            return True
+def func2(idx, sum_val, prev_num):
+    global ans
+    if idx == N-1:
+        ans += sum_val
+        return
 
-        func(arr, n, sum_val, num+1)
+    if nums[idx] == prev_num:
+        ans += sum_val
+        V[prev_num] = True
+        for i in range(1, N+1):
+            if not V[i]:
+                func2(idx+1, 0, i)
+                break
+    else:
+        for i in range(prev_num + 1, N+1):
+            if not V[i]:
+                func2(idx, sum_val + math.factorial(N-idx-1), i)
+                break
 
-ans = []
 if A[0] == 1:
-    ans = func([], N-1, 0, 1)
+    num = A[1]
+    ans = []
+    V = [False] * (N + 1)
+    func1([], 0, 1, N-1)
     print(*ans)
 
 else:
-    numbers = A[1:]
-
+    nums = A[1:]
+    ans = 0
+    V = [False] * (N + 1)
+    func2(0, 0, 1)
+    print(ans+1)
